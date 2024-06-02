@@ -21,7 +21,7 @@ import CustomizeIconImage from "images/customize-icon.svg";
 import FastIconImage from "images/fast-icon.svg";
 import ReliableIconImage from "images/reliable-icon.svg";
 import SimpleIconImage from "images/simple-icon.svg";
-import Logo from "../../images/logo.svg";
+import Logo from "../../images/smallLogo.svg";
 import Alert from "../../images/alert.svg";
 import UpRocket from "../../images/upRocket.svg";
 import downRocket from "../../images/downRocket.svg";
