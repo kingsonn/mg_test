@@ -119,18 +119,12 @@ const PrimaryLink = tw.button`
   rounded-full my-4
 `;
 const Why= ({heading}) => {
-  /*
-   * This componets has an array of object denoting the cards defined below. Each object in the cards array can have the key (Change it according to your need, you can also add more objects to have more cards in this feature component) or you can directly pass this using the cards prop:
-   *  1) imageSrc - the image shown at the top of the card
-   *  2) title - the title of the card
-   *  3) description - the description of the card
-   *  If a key for a particular card is not provided, a default value is used
-   */
+  
   const [value, setValue] = useState(10);
   const [domain, setDomain] = useState(17);
   const [open, setOpen] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  const [domainValue, setDomainValue] = useState()
   const toggleModal = () => setModalIsOpen(!modalIsOpen);
 
 
@@ -160,18 +154,19 @@ const Why= ({heading}) => {
                 min={0}
                 step={10}
                 onChange={(e) => {
+                  
                   setValue(e.target.value);
                   e.target.value == 0
-                    ? setDomain(7)
+                    ? setDomain(7) & setDomainValue(7)
                     : e.target.value == 10
-                    ? setDomain(17)
+                    ? setDomain(17) & setDomainValue(17)
                     : e.target.value == 20
-                    ? setDomain(35)
+                    ? setDomain(35) & setDomainValue(35)
                     : e.target.value == 30
-                    ? setDomain(70)
+                    ? setDomain(70) & setDomainValue(70)
                     : e.target.value == 40
-                    ? setDomain(175)
-                    : setDomain(350) & toggleModal();
+                    ? setDomain(175) & setDomainValue(175)
+                    : setDomain(350) & toggleModal() & setDomainValue(350);
                 }}
               />
               <div tw=" pb-8 flex justify-between font-medium">
@@ -186,11 +181,12 @@ const Why= ({heading}) => {
                 <span tw="font-semibold py-6">Total domains</span>
                 <div tw="flex justify-end">
                   <input
-                    value={domain}
+                    value={domainValue}
                     type="number"
+                    onChange={(e)=> setDomainValue(e.target.value)}
                     tw="w-[40%] text-xl mx-4 border-2 justify-items-center	pl-2 "
                   ></input>
-                  <button tw="underline text-[#0038FF]">Edit</button>
+                  <button onClick={()=>{setDomain(domainValue)}} tw="underline text-[#0038FF]">Edit</button>
                 </div>
                 <span tw="font-semibold">Total users</span>
                 <div tw="flex justify-end">
@@ -199,7 +195,7 @@ const Why= ({heading}) => {
                     type="number"
                     tw="w-[40%] text-xl mx-4 border-2 justify-items-center	pl-2 "
                   ></input>
-                  <button tw="underline text-[#0038FF]">Edit</button>
+                  <button tw="invisible underline text-[#0038FF]">Edit</button>
                 </div>
               </div>
               <hr tw="h-px my-4 bg-gray-200 border-0 dark:bg-blackLight"></hr>

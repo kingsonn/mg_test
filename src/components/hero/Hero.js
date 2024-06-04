@@ -16,7 +16,7 @@ import Top4Customer from "../../images/top4_customer.svg"
 import Top5Customer from "../../images/top5_customer.svg"
 import Top6Customer from "../../images/top6_customer.svg"
 const Container = tw.div`relative`;
-const TwoColumn = tw.div`flex flex-col lg:flex-row lg:items-center max-w-screen-xl mx-auto py-20 md:py-[4rem]`;
+const TwoColumn = tw.div`flex flex-col lg:flex-row lg:items-center max-w-screen-xl mx-auto pb-10 md:py-[4rem]`;
 const LeftColumn = tw.div`relative lg:w-6/12 px-[3rem] text-center max-w-lg mx-auto lg:max-w-none lg:text-left`;
 const RightColumn = tw.div`relative mt-12 lg:mt-0 flex-1 flex flex-col justify-center lg:self-end`;
 
@@ -29,7 +29,7 @@ const PrimaryLink = tw.button`
   rounded-full my-4
 `;
 const Solution = tw.p`
-bg-white rounded-full px-3 py-3 inline-flex border-2 border-blackLight mb-2
+bg-white rounded-full text-xs px-3 py-3 inline-flex border-2 border-blackLight mb-2
 
 `;
 const Actions = styled.div`
@@ -50,7 +50,7 @@ const DecoratorBlob1 = styled(SvgDecoratorBlob1)`
 `;
 
 const CustomersLogoStrip = styled.div`
-  ${tw`mt-12  lg:mt-0 sm:pl-[7rem] sm:pr-[5rem] sm:mt-0`}
+  ${tw`mt-12 px-4 lg:mt-0 sm:pl-[7rem] sm:pr-[5rem] sm:mt-0`}
   p {
     ${tw`uppercase text-sm lg:text-xs tracking-wider font-bold text-black`}
   }
@@ -58,7 +58,7 @@ const CustomersLogoStrip = styled.div`
     ${tw` grid grid-cols-3 justify-items-center sm:grid-cols-6 sm:gap-3 sm:pb-12 items-center`}
   }
   img {
-    ${tw`mt-4 sm:w-full   lg:pr-16 xl:pr-10`}
+    ${tw`mt-4 sm:w-full w-[90%]  lg:pr-16 xl:pr-10`}
   }
 `;
 
@@ -70,8 +70,11 @@ const CustomersLogoStrip = styled.div`
       <Container>
         <TwoColumn>
           <LeftColumn>
-            <Solution>
+            <Solution tw="hidden sm:inline-flex">
             Build a scalable cold email infrastructure🧨
+            </Solution>
+            <Solution tw="sm:hidden">
+            Scalable cold email infrastructure
             </Solution>
             <Heading>
               Focus on <span tw="text-font">sending emails </span> we do the rest
@@ -85,7 +88,7 @@ const CustomersLogoStrip = styled.div`
           </LeftColumn>
           <RightColumn>
             <IllustrationContainer>
-              <img tw="min-w-0 w-full  xl:max-w-3xl" src={DesignIllustration} alt="Design Illustration" />
+              <img tw="min-w-0 w-full px-4 lg:px-0 xl:max-w-3xl" src={DesignIllustration} alt="Design Illustration" />
             </IllustrationContainer>
           </RightColumn>
         </TwoColumn>

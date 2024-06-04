@@ -23,7 +23,7 @@ export default () => {
   const HighlightedText = tw.span`text-primary-500`;
 
   return (
-    <div tw="font-display  text-secondary-500 ">
+    <div tw="font-display overflow-hidden text-secondary-500 ">
       <Hero roundedHeaderButton={true} />
       <Why
         subheading={<Subheading>Features</Subheading>}
