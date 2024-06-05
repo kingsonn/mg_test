@@ -74,8 +74,8 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
     <>
     <NavLinks key={1}>
       <NavLink href="#why">Why Inbox Automate?</NavLink>
-      <NavLink href="/#">Pricing</NavLink>
-      <NavLink href="/#">FAQs</NavLink>
+      <NavLink href="#pay">Pricing</NavLink>
+      <NavLink href="#faq">FAQs</NavLink>
     </NavLinks>
     <NavLinks key={2}>
       <NavLink href="/#" tw="lg:ml-0 invisible">

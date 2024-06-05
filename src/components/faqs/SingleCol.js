@@ -73,7 +73,7 @@ export default ({
   };
 
   return (
-    <Container tw="px-4">
+    <Container id="faq" tw="px-4">
       <ContentWithPaddingXl>
         <Column>
           <HeaderContent tw="grid justify-items-center">
