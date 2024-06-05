@@ -158,7 +158,7 @@ export default ({
               <div tw="pr-8 pt-8">
                 <PrimaryLink>
                   <div tw="flex items-center justify-center">
-                    Get started <img tw="pl-1" src={arrow}></img>
+                    Book a meet <img tw="pl-1" src={arrow}></img>
                   </div>
                 </PrimaryLink>
               </div>
@@ -209,7 +209,7 @@ export default ({
               <div tw="pr-8 pt-8">
                 <PrimaryLink>
                   <div tw="flex items-center justify-center">
-                    Get started <img tw="pl-1" src={arrow}></img>
+                    Book a meet <img tw="pl-1" src={arrow}></img>
                   </div>
                 </PrimaryLink>
               </div>

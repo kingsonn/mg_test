@@ -25,7 +25,7 @@ const DecoratorBlob2 = tw(SvgDecoratorBlob1)`absolute top-0 right-0 w-80 h-80 tr
 export default ({
   subheading = "Interested in Treact ?",
   heading = "Join the closed beta now.",
-  primaryLinkText = "Get Started",
+  primaryLinkText = "Book a meet",
   primaryLinkUrl = "http://timerse.com",
   secondaryLinkText = "Contact Us",
   secondaryLinkUrl = "http://google.com",

@@ -455,12 +455,12 @@ export const components = {
       type: "CTA Section",
       elements: {
         GetStarted: {
-          name: "Get Started",
+          name: "Book a meet",
           component: GetStartedCTA,
           url: "/components/blocks/CTA/GetStarted",
         },
         GetStartedLight: {
-          name: "Get Started Light",
+          name: "Book a meet Light",
           component: GetStartedLightCTA,
           url: "/components/blocks/CTA/GetStartedLight",
         },

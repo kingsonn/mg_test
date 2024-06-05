@@ -82,7 +82,7 @@ const CustomersLogoStrip = styled.div`
             <Paragraph>
             Why did the email go to therapy? Because it had attachment issues! But in all seriousness, our reliable cold email infrastructure is designed to maximize your return on investment by ensuring your emails reach their intended recipients and generate positive responses.
             </Paragraph>
-            <PrimaryLink href="/#">Get Started</PrimaryLink>
+            <PrimaryLink href="/#">Book a meet</PrimaryLink>
 
             
           </LeftColumn>

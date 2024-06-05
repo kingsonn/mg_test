@@ -77,7 +77,7 @@ export default ({
   subheading = "Our Expertise",
   heading = <>A better price, easy to rise</>,
   description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  primaryButtonText = "Learn More",
+  primaryButtonText = "Book a meet",
   primaryButtonUrl = "https://timerse.com",
   imageSrc = TeamIllustrationSrc,
   buttonRounded = true,
@@ -108,7 +108,7 @@ export default ({
               
               >
                 <div tw="flex items-center justify-center">
-                    Learn more <img tw="pl-1" src={arrow}></img>
+                    Book a meet <img tw="pl-1" src={arrow}></img>
                   </div>
               </PrimaryButton>
             </TextContent>

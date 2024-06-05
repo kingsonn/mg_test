@@ -53,7 +53,7 @@ export default () => {
         subheading={<Subheading>STEPS</Subheading>}
         heading={
           <>
-            Easy to <HighlightedText>Get Started.</HighlightedText>
+            Easy to <HighlightedText>Book a meet.</HighlightedText>
           </>
         }
         textOnLeft={false}

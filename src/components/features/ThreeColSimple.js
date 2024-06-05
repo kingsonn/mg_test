@@ -71,7 +71,7 @@ export default ({
       url: "https://reddit.com"
     }
   ],
-  linkText = "Learn More",
+  linkText = "Book a meet",
   heading = "",
   subheading = "",
   description = "",

@@ -173,7 +173,7 @@ export default ({ headingText = "Privacy Policy" }) => {
             <p>
               Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies remain on your personal computer or
               mobile device when You go offline, while Session Cookies are deleted as soon as You close your web
-              browser. Learn more about cookies: <a href="https://www.termsfeed.com/blog/cookies/">All About Cookies</a>
+              browser. Book a meet about cookies: <a href="https://www.termsfeed.com/blog/cookies/">All About Cookies</a>
               .
             </p>
             <p>We use both session and persistent Cookies for the purposes set out below:</p>

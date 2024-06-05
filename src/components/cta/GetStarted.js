@@ -24,7 +24,7 @@ const DecoratorBlob1 = tw(SvgDecoratorBlob1)`absolute bottom-0 left-0 w-80 h-80 
 const DecoratorBlob2 = tw(SvgDecoratorBlob1)`absolute top-0 right-0 w-80 h-80 transform  translate-x-20 -translate-y-64 text-primary-700 opacity-50`
 export default ({
   text = "Developers all over the world are happily using Treact.",
-  primaryLinkText = "Get Started",
+  primaryLinkText = "Book a meet",
   primaryLinkUrl = "http://timerse.com",
   secondaryLinkText = "Contact Us",
   secondaryLinkUrl = "http://google.com",

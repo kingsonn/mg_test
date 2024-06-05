@@ -78,7 +78,7 @@ export default ({
         <Column>
           <HeaderContent tw="grid justify-items-center">
             <Heading>Frequently Asked Questions</Heading>
-          <Description>Have some questions before you get started? Check out our FAQs below or call us (+62) 98076543</Description>
+          <Description>Have some questions before you Book a meet? Check out our FAQs below or call us (+62) 98076543</Description>
           </HeaderContent>
           <FAQSContainer>
             {faqs.map((faq, index) => (
