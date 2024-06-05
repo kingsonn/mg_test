@@ -253,7 +253,7 @@ const Why= ({heading}) => {
             <CloseIcon tw="w-6 h-6" />
           </CloseModalButton>
           <div className="content">
-            <div tw="w-full pb-[76%] relative">
+            <div tw="w-full pb-[80%] relative">
               <iframe
                 src="https://giphy.com/embed/MDJ9IbxxvDUQM"
                 tw="w-full h-[100%] absolute"
@@ -261,7 +261,7 @@ const Why= ({heading}) => {
             </div>
           <PrimaryLink>
             <div tw="flex items-center justify-center">
-              Get started now <img tw="pl-1" src={arrow}></img>
+             Book a meet <img tw="pl-1" src={arrow}></img>
             </div>
           </PrimaryLink>
           </div>
