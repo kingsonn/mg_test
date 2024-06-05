@@ -181,12 +181,12 @@ const Why= ({heading}) => {
                 <span tw="font-semibold py-6 justify-self-start">Total domains</span>
                 <div tw="flex justify-end">
                   <input
-                    value={domainValue}
+                    value={domain}
                     type="number"
-                    onChange={(e)=> setDomainValue(e.target.value)}
+                    onChange={(e)=> setDomain(e.target.value)}
                     tw="w-[40%] text-xs md:text-xl mx-4 border-2 justify-items-center	pl-2 "
                   ></input>
-                  <button onClick={()=>{setDomain(domainValue)}} tw="underline text-[#0038FF]">Edit</button>
+                  {/* <button onClick={()=>{setDomain(domainValue)}} tw="underline text-[#0038FF]">Edit</button> */}
                 </div>
                 <span tw="font-semibold justify-self-start">Total users</span>
                 <div tw="flex justify-end">
@@ -195,7 +195,7 @@ const Why= ({heading}) => {
                     type="number"
                     tw="w-[40%] text-xs md:text-xl mx-4 border-2 justify-items-center	pl-2 "
                   ></input>
-                  <button tw="invisible underline text-[#0038FF]">Edit</button>
+                  {/* <button tw="invisible underline text-[#0038FF]">Edit</button> */}
                 </div>
               </div>
               <hr tw="h-px my-4 bg-gray-200 border-0 dark:bg-blackLight"></hr>
