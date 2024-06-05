@@ -15,7 +15,7 @@ import arrow from "../../images/arrow.svg";
 import bene from "../../images/bene2.svg"
 import testi from "../../images/testimonial.svg"
 const Container = tw.div`relative`;
-const TwoColumn = tw.div`flex flex-col items-center  md:flex-row  md:justify-center max-w-screen-lg mx-auto py-20 md:py-0`;
+const TwoColumn = tw.div`flex flex-col items-center  md:flex-row  md:justify-center max-w-screen-lg mx-auto py-8 sm:py-20 md:py-0`;
 const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
 const ImageColumn = tw(Column)` flex-shrink-0 relative`;
 const TextColumn = styled(Column)((props) => [
@@ -63,12 +63,12 @@ const Heading = tw(
 )`mt-4 text-black text-left text-3xl sm:text-4xl lg:text-5xl  md:text-left`;
 const Description = tw.p`mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100`;
 export const Solution = tw.p`
-bg-white rounded-full px-6 py-2 text-sm inline-flex border-2 border-blackLight mb-1
+bg-white rounded-full px-6 py-2 text-sm inline-flex border-2 border-blackLight mb-2
 
 `;
 
 export const PrimaryButton = tw.button`
-   w-[40%] mb-12 mt-8 md:mt-6
+  w-[60%] md:w-[40%] mb-0 sm:mb-12 mt-8 md:mt-6
    font-semibold py-2 bg-white text-black border-2 border-black shadow-shade
    hocus:bg-font hocus:text-gray-200 
   rounded-full my-4
@@ -98,11 +98,11 @@ export default ({
           <Card tw="pt-12">
             <TextContent tw="py-8">
               <Solution>Let’s say goodbye to errors✌</Solution>
-              <h2 tw="font-semibold text-black text-4xl">Those who live  </h2>
-              <h2 tw="font-semibold text-black text-4xl">easy, live as a</h2>
-              <h2 tw="font-semibold text-black text-4xl">result of our efforts</h2>
+              <h2 tw="font-semibold text-black text-3xl sm:text-4xl">Those who live  </h2>
+              <h2 tw="font-semibold text-black text-3xl sm:text-4xl ">easy, live as a</h2>
+              <h2 tw="font-semibold text-black text-3xl sm:text-4xl">result of our efforts</h2>
               <div tw="pt-4">
-              Please share your reviews with us at genius@inboxautomate.com, because the more you love, <p></p>the more we build products for you to love.
+              Please share your reviews with us at genius@inboxautomate.com, because the more you love, <p tw="hidden lg:block"></p>the more we build products for you to love.
               </div>
               <PrimaryButton
               
@@ -114,8 +114,8 @@ export default ({
             </TextContent>
           </Card>
         </Column>
-        <Column>
-          <img tw="" src={testi} />
+        <Column tw="">
+          <img tw="px-4 sm:px-0" src={testi} />
         </Column>
       </TwoColumn>
       

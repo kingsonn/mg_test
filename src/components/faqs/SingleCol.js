@@ -11,7 +11,7 @@ import { ReactComponent as SvgDecoratorBlob1 } from "images/svg-decorator-blob-7
 import { ReactComponent as SvgDecoratorBlob2 } from "images/svg-decorator-blob-8.svg";
 import down from "../../images/down.svg"
 const Subheading = tw(SubheadingBase)`mb-4 text-center`;
-const Heading = tw(SectionHeading)`w-full text-center font-medium`;
+const Heading = tw(SectionHeading)`w-full text-2xl sm:text-4xl text-center font-medium`;
 const Description = tw(SectionDescription)`w-[90%] text-center justify-self-center`;
 
 const Column = tw.div`flex flex-col items-center`;
@@ -73,7 +73,7 @@ export default ({
   };
 
   return (
-    <Container>
+    <Container tw="px-4">
       <ContentWithPaddingXl>
         <Column>
           <HeaderContent tw="grid justify-items-center">

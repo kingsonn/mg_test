@@ -67,7 +67,7 @@ bg-white rounded-full px-6 py-2 text-sm inline-flex border-2 border-blackLight m
 `;
 
 export const PrimaryButton = tw.button`
-   w-[40%] mb-12 mt-8 md:mt-6
+w-[60%] md:w-[40%] mb-2 sm:mb-12 mt-8 md:mt-6
    font-semibold py-2 bg-white text-black border-2 border-black shadow-shade
    hocus:bg-font hocus:text-gray-200 
   rounded-full my-4
@@ -128,15 +128,15 @@ export default ({
           </Card>
         </Column>
         <Column>
-          <img tw="" src={benefitpic} />
+          <img tw="px-4 sm:px-0" src={benefitpic} />
         </Column>
       </TwoColumn>
-      <TwoColumn tw="py-12">
+      <TwoColumn tw="py-0 sm:py-12">
       <Column>
-          <img tw="" src={bene} />
+          <img tw="hidden md:block" src={bene} />
         </Column>
         <Column textOnLeft={textOnLeft}>
-          <Card tw="pt-24 pl-12">
+          <Card tw="pt-4 md:pt-24 pl-0 md:pl-12">
             <TextContent>
               <Solution>Let’s say goodbye to errors✌</Solution>
               <h2 tw="font-semibold text-black text-4xl">We are 100x faster than your VA, and that too without errors</h2>
@@ -144,7 +144,7 @@ export default ({
               What a virtual assistant takes hours to do, we do in just a few seconds
               </div>
               <PrimaryButton
-              tw="w-[45%]"
+              tw="w-[60%] md:w-[45%]"
               >
                 <div tw="flex items-center justify-center">
                     Learn more <img tw="pl-1" src={arrow}></img>
@@ -153,7 +153,9 @@ export default ({
             </TextContent>
           </Card>
         </Column>
-      
+        <Column tw="md:hidden">
+          <img tw="md:hidden px-4 md:px-0 py-10" src={bene} />
+        </Column>
       </TwoColumn>
     </Container>
   );
