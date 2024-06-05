@@ -35,10 +35,10 @@ import arrow from "../../images/arrow.svg";
 const Container = tw.div`relative`;
 
 const ThreeColumnContainer = styled.div`
-  ${tw`flex flex-col items-center md:items-stretch md:flex-row flex-wrap md:justify-center max-w-screen-lg mx-auto py-20 md:py-12 md:pb-16`}
+  ${tw`flex flex-col items-center items-stretch md:flex-row flex-wrap md:justify-center max-w-screen-lg mx-auto py-10 lg:pb-20 md:py-12 md:pb-16`}
 `;
 const Subheading = tw(SubheadingBase)`mb-4`;
-const Heading = tw.h2`w-[60%] text-4xl sm:text-5xl text-black font-semibold text-center tracking-tight`;
+const Heading = tw.h2`w-[60%] text-2xl sm:text-5xl text-black font-medium text-center tracking-tight`;
 const Description = tw(SectionDescription)`w-full text-center`;
 
 const VerticalSpacer = tw.div`mt-10 w-full`;
@@ -88,7 +88,7 @@ const Column = styled.div`
 `;
 
 const Card = styled.div`
-  ${tw` rounded-lg text-black sm:flex-row items-center border-0 border-black sm:items-start text-center sm:text-left h-full mx-4 pt-10 pb-2`}
+  ${tw` rounded-lg text-black sm:flex-row md:mx-4 items-center border-0 border-black sm:items-start text-center sm:text-left h-full mx-0  pt-10 pb-6 md:pb-2`}
   // .imageContainer {
   //   ${tw`border text-center rounded-full flex-shrink-0`}
   //   img {
@@ -105,7 +105,7 @@ const Card = styled.div`
   }
 
   .description {
-    ${tw`mt-1 sm:mt-4 font-medium text-black leading-loose`}
+    ${tw`mt-1 sm:mt-4 font-medium text-black text-left leading-loose`}
   }
 `;
 
@@ -124,7 +124,7 @@ const Why= ({heading}) => {
   const [domain, setDomain] = useState(17);
   const [open, setOpen] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [domainValue, setDomainValue] = useState()
+  const [domainValue, setDomainValue] = useState(17)
   const toggleModal = () => setModalIsOpen(!modalIsOpen);
 
 
@@ -132,13 +132,13 @@ const Why= ({heading}) => {
     <Container id="why">
       <ThreeColumnContainer>
         {/* {subheading && <Subheading>{subheading}</Subheading>} */}
-        <Heading>{heading}</Heading>
+        <Heading tw="mx-auto  ">{heading}</Heading>
         {/* {description && <Description>{description}</Description>} */}
         <VerticalSpacer />
         <Column>
-          <Card tw="bg-calBg">
+          <Card tw="bg-calBg md:mr-4">
             <div tw="flex items-center gap-1 px-8">
-              <span tw="font-bold text-2xl">With InboxAutomate</span>
+              <span tw="font-bold text-xl md:text-2xl">With InboxAutomate</span>
               <span className="imageContainer">
                 <img src={Logo} alt="" />
               </span>
@@ -169,7 +169,7 @@ const Why= ({heading}) => {
                     : setDomain(350) & toggleModal() & setDomainValue(350);
                 }}
               />
-              <div tw=" pb-8 flex justify-between font-medium">
+              <div tw=" pb-8 flex justify-between text-xs sm:text-sm font-medium">
                 <span>10k</span>
                 <span tw="pl-3">25k</span>
                 <span tw="pl-3">50k</span>
@@ -178,35 +178,35 @@ const Why= ({heading}) => {
                 <span>500k</span>
               </div>
               <div tw="grid grid-cols-2 items-center	">
-                <span tw="font-semibold py-6">Total domains</span>
+                <span tw="font-semibold py-6 justify-self-start">Total domains</span>
                 <div tw="flex justify-end">
                   <input
                     value={domainValue}
                     type="number"
                     onChange={(e)=> setDomainValue(e.target.value)}
-                    tw="w-[40%] text-xl mx-4 border-2 justify-items-center	pl-2 "
+                    tw="w-[40%] text-xs md:text-xl mx-4 border-2 justify-items-center	pl-2 "
                   ></input>
                   <button onClick={()=>{setDomain(domainValue)}} tw="underline text-[#0038FF]">Edit</button>
                 </div>
-                <span tw="font-semibold">Total users</span>
+                <span tw="font-semibold justify-self-start">Total users</span>
                 <div tw="flex justify-end">
                   <input
                     value={domain * 3}
                     type="number"
-                    tw="w-[40%] text-xl mx-4 border-2 justify-items-center	pl-2 "
+                    tw="w-[40%] text-xs md:text-xl mx-4 border-2 justify-items-center	pl-2 "
                   ></input>
                   <button tw="invisible underline text-[#0038FF]">Edit</button>
                 </div>
               </div>
               <hr tw="h-px my-4 bg-gray-200 border-0 dark:bg-blackLight"></hr>
             </div>
-            <div tw="grid grid-cols-3 items-center my-6 px-8">
-              <div tw="col-span-2">
-                <p tw="text-2xl font-medium">Total monthly cost</p>
+            <div tw="grid grid-cols-3 gap-3 items-stretch items-center my-6 pr-8 pl-8 sm:pl-8">
+              <div tw="col-span-2 justify-self-start">
+                <p tw="text-base lg:text-xl font-medium">Total monthly cost</p>
               </div>
-              <div tw="font-medium text-2xl flex justify-end	items-center">
+              <div tw="font-medium text-base lg:text-2xl flex justify-end	items-center">
                 ${domain * 15}
-                <span tw="font-light text-sm text-[#858583]">/month</span>
+                <span tw="font-light text-xs sm:text-sm text-[#858583]">/month</span>
               </div>
             </div>
             <div tw="flex items-center text-[#858583] col-span-2 px-8 pb-2">
@@ -219,18 +219,18 @@ const Why= ({heading}) => {
             </div>
             <hr tw="h-px mt-8 mb-6 mx-8 bg-gray-200 border-0 dark:bg-blackLight"></hr>
             <div tw="grid grid-cols-2 pl-8">
-              <div>
-                <p tw="text-xl pb-6 font-semibold">List's Features</p>
-                <ul tw="font-medium">
-                  <li tw="flex pb-4">
+              <div tw="justify-self-start">
+                <p tw="text-xl pb-6 font-semibold ">List's Features</p>
+                <ul tw="font-medium text-xs sm:text-sm ">
+                  <li tw="flex pb-4 items-center">
                     <img tw="pr-3" src={check}></img>
                     Better open rates
                   </li>
-                  <li tw="flex pb-4">
+                  <li tw="flex pb-4 items-center">
                     <img tw="pr-3" src={check}></img>
                     Better inbox ratio
                   </li>
-                  <li tw="flex">
+                  <li tw="flex items-center">
                     <img tw="pr-3" src={check}></img>
                     Better reply rate
                   </li>
@@ -266,65 +266,65 @@ const Why= ({heading}) => {
           </PrimaryLink>
           </div>
         </StyledModal>
-        <Column>
-          <Card tw="bg-calBg2">
+        <Column tw="">
+          <Card tw="bg-calBg2  md:ml-4 ">
             <div tw="flex items-center gap-1 px-8">
-              <span tw="font-bold text-2xl">With Others</span>
+              <span tw="font-bold text-xl md:text-2xl">With Others</span>
               <span tw="invisible" className="imageContainer">
                 <img src={Logo} alt="" />
               </span>
             </div>
             <div tw="grid grid-cols-3 items-center mt-6 mb-8 px-8">
-              <div tw="col-span-2 flex">
+              <div tw="col-span-2 flex items-center">
                 <img tw="pr-4" src={googleLogo}></img>
-                <p tw="text-lg font-medium">Google licence fee</p>
+                <p tw="text-sm lg:text-lg font-medium">Google licence fee</p>
               </div>
-              <div tw="font-medium text-2xl flex justify-end	items-center">
+              <div tw="font-medium text-base sm:text-2xl flex justify-end	items-center">
                 ${domain * 24}
               </div>
             </div>
             <div tw="grid grid-cols-3 items-center mt-6 mb-8  px-8">
-              <div tw="col-span-2 flex">
+              <div tw="col-span-2 flex items-center">
                 <img tw="pr-4" src={setupLogo}></img>
-                <p tw="text-lg font-medium">Setup costs</p>
+                <p tw="text-sm lg:text-lg font-medium">Setup costs</p>
               </div>
-              <div tw="font-medium text-2xl flex justify-end	items-center">
+              <div tw="font-medium text-base sm:text-2xl flex justify-end	items-center">
                 ${domain * 10}
-                <span tw="font-light text-sm text-[#858583]">/month</span>
+                <span tw="font-light text-xs sm:text-sm text-[#858583]">/month</span>
               </div>
             </div>
             <div tw="grid grid-cols-3 items-center mt-6 mb-8 px-8">
-              <div tw="col-span-2 flex">
+              <div tw="col-span-2 flex items-center">
                 <img tw="pr-4" src={mailLogo}></img>
-                <p tw="text-lg font-medium">Mailbox maintainance</p>
+                <p tw="text-sm lg:text-lg font-medium">Maintainance</p>
               </div>
-              <div tw="font-medium text-2xl flex justify-end	items-center">
+              <div tw="font-medium text-base sm:text-2xl flex justify-end	items-center">
                 ${domain * 6}
-                <span tw="font-light text-sm text-[#858583]">/month</span>
+                <span tw="font-light text-xs sm:text-sm text-[#858583]">/month</span>
               </div>
             </div>
             <hr tw="h-px mt-4 mb-0 mx-8 bg-gray-200 border-0 dark:bg-blackLight"></hr>
             <div tw="grid grid-cols-3 items-center mb-6 mt-6 px-8">
-              <div tw="col-span-2 pb-4">
-                <p tw="text-2xl font-medium">Set up cost</p>
+              <div tw="col-span-2 pb-4 justify-self-start">
+                <p tw="text-base lg:text-xl font-medium">Set up cost</p>
               </div>
-              <div tw="font-medium text-2xl flex justify-end	items-center pb-4">
+              <div tw="font-medium text-base lg:text-xl flex justify-end	items-center pb-4">
                 ${domain * 10}
                 {/* <span tw="font-light text-sm text-[#858583]">/month</span> */}
               </div>
-              <div tw="col-span-2">
-                <p tw="text-2xl font-medium">Recurring cost</p>
+              <div tw="col-span-2 justify-self-start">
+                <p tw="text-base lg:text-xl font-medium">Recurring cost</p>
               </div>
-              <div tw="font-medium text-2xl flex justify-end	items-center">
+              <div tw="font-medium text-base lg:text-xl flex justify-end	items-center">
                 ${domain * 24 + domain * 6}
-                <span tw="font-light text-sm text-[#858583]">/month</span>
+                <span tw="font-light text-xs lg:text-sm text-[#858583]">/month</span>
               </div>
               {/* <div tw="flex items-center text-[#858583] col-span-2">
                 <p tw="px-[2px] pt-1">Excluding one time setup</p>
               </div> */}
             </div>
             <div tw="px-8 mb-3">
-              <ul tw="font-medium px-[2px]">
+              <ul tw="font-medium px-[2px] text-sm sm:text-base">
                 <li tw="flex pb-4">
                   <img tw="pr-3" src={dot}></img>
                   Low open rates

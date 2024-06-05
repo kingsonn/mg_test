@@ -34,11 +34,11 @@ import arrow from "../../images/arrow.svg";
 const Container = tw.div`relative`;
 
 const ThreeColumnContainer = styled.div`
-  ${tw`flex flex-col items-center md:items-stretch md:flex-row flex-wrap md:justify-center max-w-screen-lg mx-auto py-20 md:pt-0 pb-4`}
+  ${tw`flex flex-col items-center items-stretch md:flex-row flex-wrap md:justify-center max-w-screen-lg mx-auto py-8 sm:py-20 md:pt-0 pb-4`}
 `;
 const Subheading = tw(SubheadingBase)`mb-4`;
-const Heading = tw.h2`w-[60%] text-4xl sm:text-5xl text-black font-semibold text-center tracking-tight`;
-const Description = tw(SectionDescription)`w-full text-center`;
+const Heading = tw.h2`w-[60%] mx-auto text-3xl md:text-4xl sm:text-5xl text-black font-semibold text-center tracking-tight`;
+const Description = tw(SectionDescription)`w-full px-8 text-center mx-auto`;
 
 const VerticalSpacer = tw.div`mt-10 w-full`;
 
@@ -47,7 +47,7 @@ const Column = styled.div`
 `;
 
 const Card = styled.div`
-  ${tw` rounded-lg text-black sm:flex-row items-center border-0 border-black sm:items-start text-center sm:text-left h-full mx-4  pb-2`}
+  ${tw` rounded-lg text-black sm:flex-row items-center border-0 border-black sm:items-start text-center sm:text-left h-full md:mx-4  pb-2`}
   // .imageContainer {
   //   ${tw`border text-center rounded-full flex-shrink-0`}
   //   img {
@@ -103,7 +103,7 @@ export default ({
   if (!cards) cards = defaultCards;
 
   return (
-    <Container id="pay" tw="bg-[#F4FCFF] py-12">
+    <Container id="pay" tw="bg-[#F4FCFF] py-4 sm:py-12">
       <ThreeColumnContainer>
         {/* {subheading && <Subheading>{subheading}</Subheading>} */}
         <Heading>{heading}</Heading>
@@ -115,10 +115,10 @@ export default ({
 
         <Column>
           <Card tw="bg-[#FFF9E3]">
-            <div tw="grid grid-cols-4 pt-1 px-8">
-              <div tw=" col-span-3 pt-8">
-                <p tw="text-xl">Genius</p>
-                <span tw="font-semibold text-4xl">Per GSuite $5</span>
+            <div tw="grid grid-cols-4 pt-1 px-4 sm:px-8">
+              <div tw=" col-span-3 pt-8 justify-self-start">
+                <p tw="text-lg sm:text-xl text-left">Genius</p>
+                <span tw="font-semibold text-xl sm:text-2xl lg:text-4xl text-left">Per GSuite $5</span>
                 <span tw="font-light text-sm text-[#858583]">/month</span>
               </div>
 
@@ -126,8 +126,8 @@ export default ({
                 <img src={payred} alt="" />
               </div>
             </div>
-            <div tw=" px-8">
-              <p tw="pb-8" className="description">
+            <div tw="px-4 sm:px-8 justify-self-start">
+              <p tw="pb-8 text-left" className="description">
                 Including setup and google licence fee
               </p>
 
@@ -136,22 +136,22 @@ export default ({
 
             <div tw=" pl-8">
               <div>
-                <ul tw="font-medium">
-                  <li tw="flex pb-6">
+                <ul tw="font-medium sm:text-base text-sm">
+                  <li tw="flex pb-6 items-center">
                     <img tw="pr-3" src={check}></img>
                     Auto DNS Adding{" "}
                   </li>
-                  <li tw="flex pb-6">
+                  <li tw="flex pb-6 items-center">
                     <img tw="pr-3" src={check}></img>
                     Auto Domain Verification{" "}
                   </li>
-                  <li tw="flex pb-6">
+                  <li tw="flex pb-6 items-center">
                     <img tw="pr-3" src={check}></img>
                     Auto User Create Per User{" "}
                   </li>
-                  <li tw="flex">
+                  <li tw="flex items-center">
                     <img tw="pr-3" src={check}></img>
-                    Smartlead Import With Auth (Add on){" "}
+                    Smartlead Import With Auth 
                   </li>
                 </ul>
               </div>
@@ -167,18 +167,18 @@ export default ({
         </Column>
         <Column>
           <Card tw="bg-[#F5E6FF]">
-            <div tw="grid grid-cols-4 pt-1 px-8">
-              <div tw=" col-span-3 pt-8">
-                <p tw="text-xl">Magician</p>
-                <span tw="font-semibold text-4xl">Contact us</span>
+            <div tw="grid grid-cols-4 pt-1 px-4 sm:px-8">
+              <div tw=" col-span-3 pt-8 justify-self-start">
+                <p tw="text-lg sm:text-xl text-left">Magician</p>
+                <span tw="font-semibold text-xl sm:text-2xl lg:text-4xl text-left">Contact us</span>
               </div>
 
               <div tw="justify-self-end">
                 <img src={payblue} alt="" />
               </div>
             </div>
-            <div tw=" px-8">
-              <p tw="pb-8" className="description">
+            <div tw=" px-4 sm:px-8 justify-self-start">
+              <p tw="pb-8 text-left" className="description">
                 Need a Genius who can setup 1000+ users in few hours?
               </p>
 
@@ -187,20 +187,20 @@ export default ({
 
             <div tw=" pl-8">
               <div>
-                <ul tw="font-medium">
-                  <li tw="flex pb-6">
+                <ul tw="font-medium sm:text-base text-sm">
+                  <li tw="flex pb-6  items-center">
                     <img tw="pr-3" src={check}></img>
                     Bulk Discount
                   </li>
-                  <li tw="flex pb-6">
+                  <li tw="flex pb-6 items-center">
                     <img tw="pr-3" src={check}></img>
                     Within 24 Hous Setup
                   </li>
-                  <li tw="flex pb-6">
+                  <li tw="flex pb-6 items-center">
                     <img tw="pr-3" src={check}></img>
                     Auth Importing
                   </li>
-                  <li tw="flex">
+                  <li tw="flex items-center">
                     <img tw="pr-3" src={check}></img>
                     Dedicated Genius Manager
                   </li>

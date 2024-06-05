@@ -50,7 +50,7 @@ const DecoratorBlob1 = styled(SvgDecoratorBlob1)`
 `;
 
 const CustomersLogoStrip = styled.div`
-  ${tw`mt-12 px-4 lg:mt-0 sm:pl-[7rem] sm:pr-[5rem] sm:mt-0`}
+  ${tw`mt-12 px-4 lg:mt-0 sm:pl-[7rem] sm:pr-[5rem] sm:mt-0 pb-3 sm:pb-0`}
   p {
     ${tw`uppercase text-sm lg:text-xs tracking-wider font-bold text-black`}
   }
