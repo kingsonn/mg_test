@@ -105,6 +105,8 @@ import MainLandingPage from "MainLandingPage.js";
 import ThankYouPage from "ThankYouPage.js";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "pages/Login.js";
+import Signup from "pages/Signup";
 
 export default function App() {
   // If you want to disable the animation just use the disabled `prop` like below on your page's component
@@ -116,9 +118,9 @@ export default function App() {
       <GlobalStyles />
       <Router>
         <Routes>
-          <Route path="/nwhy" element={<Features />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/components/:type/:name" element={<ComponentRenderer />} />
-          <Route path="/thank-you" element={<ThankYouPage />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/*" element={<SaaSProductLandingPage />} />
         </Routes>
       </Router>
