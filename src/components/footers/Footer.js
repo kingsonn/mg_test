@@ -124,7 +124,7 @@ export default () => {
           </div>
         </FiveColumns>
         <Divider/>
-        <CopyrightAndCompanyInfoRow tw="pb-8">
+        <CopyrightAndCompanyInfoRow tw="">
           <CopyrightNotice>&copy; Copyright@inboxautomate 2024</CopyrightNotice>
           <div tw="flex justify-end gap-3">
           <CompanyInfo>Privacy policy</CompanyInfo>
