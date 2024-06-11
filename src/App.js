@@ -107,6 +107,10 @@ import ThankYouPage from "ThankYouPage.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "pages/Login.js";
 import Signup from "pages/Signup";
+import DashedBorderSixFeatures from "components/features/DashedBorderSixFeatures";
+import FullWidthWithImage from "components/hero/FullWidthWithImage";
+import BackgroundAsImageWithCenteredContent from "components/hero/BackgroundAsImageWithCenteredContent";
+import BackgroundAsImage from "components/hero/BackgroundAsImage";
 
 export default function App() {
   // If you want to disable the animation just use the disabled `prop` like below on your page's component
@@ -122,6 +126,9 @@ export default function App() {
           <Route path="/components/:type/:name" element={<ComponentRenderer />} />
           <Route path="/login" element={<Login />} />
           <Route path="/*" element={<SaaSProductLandingPage />} />
+          <Route path="/dashboard" element={<FullWidthWithImage/>} />
+          <Route path="/domains" element={<BackgroundAsImageWithCenteredContent/>} />
+          <Route path="/order" element={<BackgroundAsImage/>} />
         </Routes>
       </Router>
     </>
