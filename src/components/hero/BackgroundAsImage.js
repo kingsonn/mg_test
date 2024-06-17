@@ -18,7 +18,7 @@ import Header, {
   NavLinks,
   NavLink as NavLinkBase,
 } from "../headers/light.js";
-
+import { useState } from "react";
 const StyledHeader = styled(Header)`
   ${tw`justify-between`}
   ${LogoLink} {
@@ -60,6 +60,8 @@ const data = [
   { provider: "Google", Persona: "Bharat Arora", email: "bharat456@gmail.com" , domain: "meetgenius.com", price:"$15"},
 
 ];
+
+const domains = ["hello.com", "bello.com", "mello.com"]
 export default ({
   navLinks = [
     <NavLinks key={1}>
@@ -83,6 +85,19 @@ export default ({
   secondaryActionUrl = "#",
   secondaryActionText = "Search Hotels",
 }) => {
+  const [dom, useDom] = useState([])
+  const [fname, usefname] = useState()
+  const [lname, uselname] = useState()
+  const [mail, usemail] = useState()
+  const [orderData, useOrder] = useState([])
+  function addition(){
+ console.log()
+    // dom.forEach((element) => {
+      let newObj = {provider: "Google", Persona: fname+" "+lname, email:mail, domain:dom[0], price: 15}
+      useOrder(orderData=> [...orderData, newObj])
+    // });
+  
+}
   return (
     <Container>
       {/* <TwoColumn>
@@ -173,20 +188,20 @@ export default ({
   <p tw="font-semibold pb-2">
     First name:
   </p>
-  <input tw="w-[100%] p-3 rounded-lg  border-2 border-blackLight"></input>
+  <input tw="w-[100%] p-3 rounded-lg  border-2 border-blackLight" onChange={(e)=>usefname(e.target.value)}></input>
  </div>
  <div tw="pt-4 col-span-3"> 
   <p tw="font-semibold pb-2">
     Last name:
   </p>
-  <input tw="w-[100%] p-3 rounded-lg  border-2 border-blackLight"></input>
+  <input tw="w-[100%] p-3 rounded-lg  border-2 border-blackLight" onChange={(e)=>uselname(e.target.value)}></input>
  </div>
  <div tw="pt-4 col-span-4"> 
   <p tw="font-semibold pb-2">
     Email:
   </p>
   <div tw="flex items-center border-2 border-blackLight rounded-lg">
-  <input tw="w-[100%] p-3   "></input>
+  <input tw="w-[100%] p-3   " onChange={(e)=>usemail(e.target.value)}></input>
   <span tw="text-xl p-3 px-4 bg-[#E7F0FF] rounded-md">@</span>
   </div>
  </div>
@@ -195,11 +210,16 @@ export default ({
     Last name:
   </p>
   <div tw="rounded-lg  border-2 border-blackLight">
-  <select placeholder="" tw="w-[100%] font-semibold p-3 border-r-4 rounded-lg  border-2 border-transparent">
+  <select onChange={(e)=>useDom([e.target.value])} tw="w-[100%] font-semibold p-3 border-r-4 rounded-lg  border-2 border-transparent">
     <option tw="font-bold">All Domains</option>
-
+      {domains.map((d, i)=>{
+        return(
+          <option value={d}>{d}</option>
+        )
+      })}
   </select>
   </div>
+  <div tw="flex justify-end"><button tw="justify-self-end mt-3 p-2 bg-[#4281FA] rounded-lg text-white font-semibold text-lg px-4 " onClick={()=>addition()}>Add</button></div>
  </div>
  
 
@@ -210,12 +230,12 @@ export default ({
           
             <th tw=" flex items-center mx-8 my-4 font-medium">Provider</th>
             <th tw="font-medium">Persona</th>
-            <th tw="font-medium">Domain status</th>
             <th tw="font-medium">Email</th>
+            <th tw="font-medium">Domain</th>
             <th tw="font-medium">Action</th>
             <th tw="font-medium">Price</th>
           </tr>
-          {data.map((val, key) => {
+          {orderData?<>{orderData.map((val, key) => {
             return (
               <tr key={key} tw="text-center border-b border-blackLight">
                 <td tw=" flex items-center mx-8 my-6 font-semibold"><span tw="p-1 flex px-2 bg-white border border-blackLight  rounded-full font-semibold mx-1"><img tw="pr-3" src={gg}></img>{val.provider}</span></td>
@@ -228,8 +248,12 @@ export default ({
               </tr>
 
             );
-          })}
+          })}</>:<></>}
+          
         </table>
+        <div tw="text-end px-10 text-lg font-semibold py-3 border-t border-b border-blackLight">Sub total</div>
+        <div tw="text-end px-10 text-lg font-semibold py-3 border-t border-b border-blackLight">Sub total</div>
+        <div tw="text-end px-10 text-lg font-semibold py-3 border-t border-b border-blackLight">Sub total</div>
       </div>
 <div tw="flex mx-24 my-10  justify-between items-center">
 <div tw="text-sm text-gray-700">Please allow 24 to 72 hour for your emails to be set up as DNS propagation can take some time</div>
