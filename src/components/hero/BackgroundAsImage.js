@@ -13,6 +13,9 @@ import sample from "../../images/sample.svg"
 import back from "../../images/backarrow.svg"
 import deelete from "../../images/delete.svg"
 import gg from "../../images/gg.svg"
+
+import { MultiSelect } from "react-multi-select-component";
+
 import Header, {
   LogoLink,
   NavLinks,
@@ -93,11 +96,21 @@ export default ({
   function addition(){
  console.log()
     // dom.forEach((element) => {
-      let newObj = {provider: "Google", Persona: fname+" "+lname, email:mail, domain:dom[0], price: 15}
+      let newObj = {provider: "Google", Persona: fname+" "+lname, email:mail, domain:dom[0], price: 5}
       useOrder(orderData=> [...orderData, newObj])
     // });
   
 }
+const [selectedFlavors, setSelectedFlavors] = useState([]);
+
+const options = [
+  { label: "Chocolate", value: "chocolate" },
+  { label: "Strawberry", value: "strawberry" },
+  { label: "Coconut", value: "coconut" },
+  { label: "Vanilla", value: "vanilla" },
+  { label: "Blueberry", value: "blueberry" },
+  { label: "Red Velvet", value: "velvet" }
+];
   return (
     <Container>
       {/* <TwoColumn>
@@ -210,14 +223,19 @@ export default ({
     Last name:
   </p>
   <div tw="rounded-lg  border-2 border-blackLight">
-  <select onChange={(e)=>useDom([e.target.value])} tw="w-[100%] font-semibold p-3 border-r-4 rounded-lg  border-2 border-transparent">
-    <option tw="font-bold">All Domains</option>
+  {/* <select onChange={(e)=>useDom([e.target.value])} tw="w-[100%] font-semibold p-3 border-r-4 rounded-lg  border-2 border-transparent">
+    <option onSelect={()=>console.log("hbhjbhb")} tw="font-bold">All Domains</option>
       {domains.map((d, i)=>{
         return(
           <option value={d}>{d}</option>
         )
       })}
-  </select>
+  </select> */}
+   <MultiSelect
+        value={selectedFlavors}
+        options={options}
+        onChange={setSelectedFlavors}
+      />
   </div>
   <div tw="flex justify-end"><button tw="justify-self-end mt-3 p-2 bg-[#4281FA] rounded-lg text-white font-semibold text-lg px-4 " onClick={()=>addition()}>Add</button></div>
  </div>
@@ -251,9 +269,9 @@ export default ({
           })}</>:<></>}
           
         </table>
-        <div tw="text-end px-10 text-lg font-semibold py-3 border-t border-b border-blackLight">Sub total</div>
-        <div tw="text-end px-10 text-lg font-semibold py-3 border-t border-b border-blackLight">Sub total</div>
-        <div tw="text-end px-10 text-lg font-semibold py-3 border-t border-b border-blackLight">Sub total</div>
+        <div tw="text-end px-10 text-lg font-semibold py-3 border-t border-b border-blackLight">Subtotal (Monthly Price): ${orderData.length*5}</div>
+        <div tw="text-end px-10 text-lg font-semibold py-3 border-t border-b border-blackLight">Domain Annual Price: ${orderData.length*5}</div>
+        <div tw="text-end px-10 text-lg font-semibold py-3 border-t border-b border-blackLight">Total Price: ${orderData.length*10}</div>
       </div>
 <div tw="flex mx-24 my-10  justify-between items-center">
 <div tw="text-sm text-gray-700">Please allow 24 to 72 hour for your emails to be set up as DNS propagation can take some time</div>

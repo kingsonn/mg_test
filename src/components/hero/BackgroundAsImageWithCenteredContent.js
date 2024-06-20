@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
@@ -12,6 +12,8 @@ import dashlogo from "../../images/dashlogo.svg"
 import sample from "../../images/sample.svg"
 import back from "../../images/backarrow.svg"
 import cross from "../../images/cross.svg"
+import { useHistory } from 'react-router-dom';
+
 import Header, {
   LogoLink,
   NavLinks,
@@ -54,9 +56,7 @@ const Actions = styled.div`
   }
 `;
 const data = [
-  { domainame: "tureais.com", users: ["Garvit", "Darsh"], domainstatus: "Active" , userscreated: "Completed", tag:"#BBG"},
-  { domainame: "tureais.com", users: ["Garvit", "Darsh"], domainstatus: "Active" , userscreated: "Completed", tag:"#BBG"},
-  { domainame: "tureais.com", users: ["Garvit", "Darsh"], domainstatus: "Active" , userscreated: "Completed", tag:"#BBG"},
+  ".com", ".co.in", ".tech" , ".in", ".ai"
 ];
 export default ({
   navLinks = [
@@ -81,6 +81,8 @@ export default ({
   secondaryActionUrl = "#",
   secondaryActionText = "Search Hotels",
 }) => {
+  const [selected, isSelected] = useState([])
+  const [domain, setDomain] = useState()
   return (
     <Container>
       {/* <TwoColumn>
@@ -139,7 +141,7 @@ export default ({
       
         </div>
       </div>
-      <div tw="flex items-center justify-between mx-16">
+      <div tw="flex items-center justify-between mx-[14rem]">
         <div tw="flex items-center mb-4">
           <div tw="border-2 border-blackLight p-2 px-4 mr-2 rounded-lg">
           <img  tw="" src={back}></img>
@@ -147,28 +149,62 @@ export default ({
           <Heading>Back</Heading>
         </div>
       </div>
-      <div tw="mx-16 flex items-center">
-        <div tw="justify-between flex mr-4 p-3 pl-4 border-2 rounded-lg border-blackLight w-full"> 
-          <div tw="font-bold">
-            Consultinggenious.com
-          </div>
-          <div tw="font-bold">
-            $15
-          </div>
-        </div>
-        <img src={cross}></img>
+      <div tw="mx-[14rem]">
+        <input value={domain} onChange={(e)=>{
+          setDomain(e.target.value)
+          isSelected([])
+          }} type="text" tw="w-full border border-blackLight py-2 rounded-lg px-3"></input>
       </div>
-      <div tw="mx-16 flex items-center">
-        <div tw="justify-between flex mr-4  w-full"> 
+      <div tw="flex mx-[14rem] my-3">
+        {domain?<><div tw="font-bold pr-3 w-auto">
+          Suggested: 
+        </div></>:<></>}
+        
+        <div tw="w-auto flex flex-wrap ">
+          {data.map((d,i)=>{
+            return (
+              <> {domain?<>{selected.includes(d)?<><div onClick={()=>isSelected(prevArray => prevArray.filter(item => item !== d))} tw=" cursor-pointer py-1 px-3 border border-black bg-[#FFE1CF] mx-1 my-1 rounded-md">{domain+d} <span>𐤕</span></div>       
+              </>:<><div onClick={()=>isSelected(prevArray => [...prevArray, d])} tw="py-1 px-3 border cursor-pointer border-blackLight mx-1 my-1 rounded-md">{domain+d} <span>✓</span></div>       
+              </>}</>:<></>}</>
+            )
+          })}
+         
+          
+                       
+        </div>
+      </div>
+    
+        {selected?<>{
+          selected.map((d,i)=>{
+            return(
+              <>
+                <div tw="mx-[14rem] flex mb-2 items-center">
+        <div tw="justify-between flex mr-4 p-3 pl-4 border-2 rounded-lg border-blackLight w-full"> 
+              <div key={i} tw="font-bold">
+            {domain+d}
+            </div>
+            <div tw="font-bold">
+              $15
+            </div>
+            </div>
+        <img tw="cursor-pointer" onClick={()=>isSelected(prevArray => prevArray.filter(item => item !== d))}  src={cross}></img>
+      </div>
+              </>
+            )
+          })
+        }</>:<></>}
+          
+    {selected.length>0?<>  <div tw="mx-[14rem] my-8 flex items-center">
+        <div tw="justify-between flex   w-full"> 
           <div tw="font-medium">
-          Subtotal (Annual Domain Price): $300
+          Subtotal (Annual Domain Price): ${selected.length*15}
                    </div>
           <button tw="font-bold bg-[#4281FA] text-white p-2 px-3 rounded-lg">
              Next
           </button>
         </div>
-        <img tw="invisible" src={cross}></img>
-      </div>
+      </div></>:<></>}
+    
     </Container>
   );
 };
