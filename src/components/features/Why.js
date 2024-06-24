@@ -12,7 +12,7 @@ import { SectionDescription } from "components/misc/Typography.js";
 import defaultCardImage from "images/shield-icon.svg";
 import ReactModalAdapter from "../../helpers/ReactModalAdapter.js";
 import { ReactComponent as CloseIcon } from "feather-icons/dist/icons/x.svg";
-
+import giphy from "../../images/giphy.gif"
 import { ReactComponent as SvgDecoratorBlob3 } from "images/svg-decorator-blob-3.svg";
 import { useState } from "react";
 import SupportIconImage from "images/support-icon.svg";
@@ -254,10 +254,11 @@ const Why= ({heading}) => {
           </CloseModalButton>
           <div className="content">
             <div tw="w-full pb-[80%] relative">
-              <iframe
+              <img tw="w-full h-[100%] absolute" src={giphy}></img>
+              {/* <iframe
                 src="https://giphy.com/embed/MDJ9IbxxvDUQM"
                 tw="w-full h-[100%] absolute"
-              ></iframe>
+              ></iframe> */}
             </div>
           <PrimaryLink>
             <div tw="flex items-center justify-center">

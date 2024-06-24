@@ -13,6 +13,7 @@ import sample from "../../images/sample.svg"
 import back from "../../images/backarrow.svg"
 import deelete from "../../images/delete.svg"
 import gg from "../../images/gg.svg"
+import { useLocation } from 'react-router-dom';
 
 import { MultiSelect } from "react-multi-select-component";
 
@@ -21,7 +22,7 @@ import Header, {
   NavLinks,
   NavLink as NavLinkBase,
 } from "../headers/light.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const StyledHeader = styled(Header)`
   ${tw`justify-between`}
   ${LogoLink} {
@@ -65,52 +66,94 @@ const data = [
 ];
 
 const domains = ["hello.com", "bello.com", "mello.com"]
-export default ({
-  navLinks = [
-    <NavLinks key={1}>
-      <NavLink href="#">About</NavLink>
-      <NavLink href="#">Blog</NavLink>
-      <NavLink href="#">Pricing</NavLink>
-      <NavLink href="#">Login</NavLink>
-    </NavLinks>,
-  ],
-  heading = (
-    <>
-      Find Perfect Hotels
-      <wbr />
-      <br />
-      <span tw="text-primary-500">anywhere you go.</span>
-    </>
-  ),
-  description = "We've been in the hotels business across the world for 5 years now. We assure you that you will always enjoy your stay with us.",
-  primaryActionUrl = "#",
-  primaryActionText = "Sign Up",
-  secondaryActionUrl = "#",
-  secondaryActionText = "Search Hotels",
-}) => {
+export default () => {
   const [dom, useDom] = useState([])
   const [fname, usefname] = useState()
   const [lname, uselname] = useState()
+  const [domainCheck, useDomainCheck] = useState({})
+  const [mailCheck, useMailCheck] = useState({})
   const [mail, usemail] = useState()
   const [orderData, useOrder] = useState([])
   function addition(){
- console.log()
-    // dom.forEach((element) => {
-      let newObj = {provider: "Google", Persona: fname+" "+lname, email:mail, domain:dom[0], price: 5}
-      useOrder(orderData=> [...orderData, newObj])
-    // });
+
+    selectedFlavors.forEach((element) => {
+      let newObj = {provider: "Google", Persona: fname+" "+lname, email:`${mail}@${element.value}`, domain:element.value, price: 5}
+      domainCheck[newObj.domain] = (domainCheck[newObj.domain]||0) + 1;
+      if(domainCheck[newObj.domain]<=3){
+        mailCheck[newObj.email] = (mailCheck[newObj.email] || 0) +1
+        if(mailCheck[newObj.email]<=1){
+          useOrder(orderData=> [...orderData, newObj])
   
+        }else {
+          mailCheck[newObj.email]= 1
+        }      
+      }else {
+        console.log("Errrrrrrryyeyaar")
+        domainCheck[newObj.domain]= 3
+      }
+      
+    });  
+    console.log(domainCheck)
+    
 }
 const [selectedFlavors, setSelectedFlavors] = useState([]);
+const [options, setOptions] = useState([])
+const location = useLocation();
+const {domains, select, fromDashboard} = location.state;
 
-const options = [
-  { label: "Chocolate", value: "chocolate" },
-  { label: "Strawberry", value: "strawberry" },
-  { label: "Coconut", value: "coconut" },
-  { label: "Vanilla", value: "vanilla" },
-  { label: "Blueberry", value: "blueberry" },
-  { label: "Red Velvet", value: "velvet" }
-];
+useEffect(() => {
+  if(domains && select){
+    const options = select.map(item => ({
+      label: `${domains}${item}`,
+      value: `${domains}${item}`
+    }));
+    setOptions(options)
+  }else if(fromDashboard){
+  const options = fromDashboard.map(item => ({
+  label: `${item.domainame}`,
+  value: `${item.domainame}`
+  }))
+  setOptions(options)
+  fromDashboard.map((item, i)=>{
+    
+    item.users.map((user,i)=>{
+      
+      let newObj = {provider: "Google", Persona: user, email:`${user}@${item.domainame}`, domain:item.domainame, price: 5}
+
+      domainCheck[newObj.domain] = (domainCheck[newObj.domain]||0) + 1;
+      if(domainCheck[newObj.domain]<=3){
+        mailCheck[newObj.email] = (mailCheck[newObj.email] || 0) +1
+        if(mailCheck[newObj.email]<=1){
+          useOrder(orderData=> [...orderData, newObj])
+  
+        }else {
+          mailCheck[newObj.email]= 1
+        }
+      }else {
+        console.log("Errrrrrrryyeyaar")
+        domainCheck[newObj.domain]= 3
+      }
+    
+
+
+    })
+  })
+
+  }
+}, [fromDashboard? fromDashboard:domains]);
+// receivedData.select.forEach(element => {
+//   useOptions(prev=>[...prev, element])
+// });
+
+// const options = [
+//   { label: receivedData.domains+receivedData.select, value: "chocolate" },
+//   { label: "Strawberry", value: "strawberry" },
+//   { label: "Coconut", value: "coconut" },
+//   { label: "Vanilla", value: "vanilla" },
+//   { label: "Blueberry", value: "blueberry" },
+//   { label: "Red Velvet", value: "velvet" }
+// ];
+
   return (
     <Container>
       {/* <TwoColumn>
@@ -172,7 +215,7 @@ const options = [
       <div tw="flex items-center justify-between mx-16">
         <div tw="flex items-center mb-4">
           <div tw="border-2 border-blackLight p-2 px-4 mr-2 rounded-lg">
-          <img  tw="" src={back}></img>
+          <a href="/domains"><img  tw="" src={back}></img></a>
           </div>
           <Heading>Back</Heading>
         </div>
@@ -214,15 +257,14 @@ const options = [
     Email:
   </p>
   <div tw="flex items-center border-2 border-blackLight rounded-lg">
-  <input tw="w-[100%] p-3   " onChange={(e)=>usemail(e.target.value)}></input>
-  <span tw="text-xl p-3 px-4 bg-[#E7F0FF] rounded-md">@</span>
+  <input tw="w-[100%] p-2" onChange={(e)=>usemail(e.target.value)}></input>
+  <span tw="text-xl p-2 px-4 bg-[#E7F0FF] rounded-md">@</span>
   </div>
  </div>
  <div tw="pt-4 col-span-2"> 
-  <p tw="invisible font-semibold pb-2">
-    Last name:
+  <p tw="font-semibold pb-2">
+   Select domains:
   </p>
-  <div tw="rounded-lg  border-2 border-blackLight">
   {/* <select onChange={(e)=>useDom([e.target.value])} tw="w-[100%] font-semibold p-3 border-r-4 rounded-lg  border-2 border-transparent">
     <option onSelect={()=>console.log("hbhjbhb")} tw="font-bold">All Domains</option>
       {domains.map((d, i)=>{
@@ -231,13 +273,17 @@ const options = [
         )
       })}
   </select> */}
+
    <MultiSelect
         value={selectedFlavors}
         options={options}
         onChange={setSelectedFlavors}
+        tw="p-1"
       />
-  </div>
-  <div tw="flex justify-end"><button tw="justify-self-end mt-3 p-2 bg-[#4281FA] rounded-lg text-white font-semibold text-lg px-4 " onClick={()=>addition()}>Add</button></div>
+
+  <div tw="flex justify-end"><button tw="justify-self-end mt-3 p-2 bg-[#4281FA] rounded-lg text-white font-semibold text-lg px-4 " onClick={()=>{
+    addition()
+    }}>Add</button></div>
  </div>
  
 
@@ -261,8 +307,11 @@ const options = [
                 <td><span tw="p-1 px-2 bg-white border border-blackLight  rounded-full font-semibold mx-1">{val.email}</span></td>
                 <td><span tw="p-1 px-2 bg-white border border-blackLight  rounded-full font-semibold mx-1">{val.domain}</span></td>
                 
-                <td > <img tw="p-1 mx-auto border border-blackLight  rounded-full " src={deelete}></img></td>
-                <td tw="font-semibold"><span tw="p-1 px-2 bg-white border border-blackLight  rounded-full font-semibold mx-1">{val.price}</span></td>
+                <td > <img tw="cursor-pointer p-1 mx-auto border border-blackLight  rounded-full " onClick={()=>{
+                  useOrder(prevArray => prevArray.filter(item => item !== val))
+                  domainCheck[val.domain] = domainCheck[val.domain] - 1;
+                  }}  src={deelete}></img></td>
+                <td tw="font-semibold"><span tw="p-1 px-2 bg-white border border-blackLight  rounded-full font-semibold mx-1">${val.price}</span></td>
               </tr>
 
             );
