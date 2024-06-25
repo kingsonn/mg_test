@@ -4,7 +4,7 @@ import tw from "twin.macro";
 //eslint-disable-next-line
 import { css } from "styled-components/macro";
 
-import Header from "../headers/light.js";
+import Header from "../headers/navbar.js";
 
 import { ReactComponent as SvgDecoratorBlob1 } from "../../images/svg-decorator-blob-1.svg";
 import DesignIllustration from "../../images/image.svg";
@@ -82,7 +82,7 @@ const CustomersLogoStrip = styled.div`
             <Paragraph>
             Why did the email go to therapy? Because it had attachment issues! But in all seriousness, our reliable cold email infrastructure is designed to maximize your return on investment by ensuring your emails reach their intended recipients and generate positive responses.
             </Paragraph>
-            <PrimaryLink href="/#">Book a meet</PrimaryLink>
+            <PrimaryLink href="/#">Get Started</PrimaryLink>
 
             
           </LeftColumn>

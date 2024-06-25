@@ -8,12 +8,13 @@ import dash2 from "../../images/dash2.svg";
 import dash3 from "../../images/dash3.svg";
 import dashlogo from "../../images/dashlogo.svg";
 import sample from "../../images/sample.svg";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { ReactComponent as MenuIcon } from "feather-icons/dist/icons/menu.svg";
 import { ReactComponent as CloseIcon } from "feather-icons/dist/icons/x.svg";
 import { MultiSelect } from "react-multi-select-component";
 import { useNavigate } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Checkbox = styled.input.attrs({ type: "checkbox" })`
   -webkit-appearance: none;
   appearance: none;
@@ -76,6 +77,11 @@ export default () => {
   const [domainFilter, setDomainFilter] = useState([])
   const [tagFilter, setTagFilter] = useState([])
   const [dashboardData, setDashboardData] = useState(data)
+  const [searchTerm, setSearchTerm] = useState('');
+  const searchTermRef = useRef(searchTerm); // Use a ref to store the searchTerm
+  const showToastMessage = (message) => {
+    toast.error(message);
+  };
   const navigate = useNavigate();
 
   // const filteredData = useMemo(() => {
@@ -105,19 +111,108 @@ export default () => {
   useEffect(() => {
     if (selectAll) {
       setSelected(dashboardData); // Select all options
-    } else if (selected.length === dashboardData.length) {
+    } else if (dashboardData.length>0 && selected.length === dashboardData.length) {
       setSelectAll(true); // If all selected, check "Select All"
     } else {
       setSelectAll(false); // If not all selected, uncheck "Select All"
     }
   }, [selectAll, selected, dashboardData]);
+  useEffect(() => {
+    const newFilteredData = data.filter(item => {
+      const columnValue = item['domainame'];
+      if (!columnValue) return false; 
 
+      // Check if searchTerm is empty before filtering
+      if (searchTerm.trim() === '') {
+        return true;
+      }
+      return String(columnValue).toLowerCase().includes(searchTerm.toLowerCase()); 
+    });
+    
+    setDashboardData(newFilteredData); // Always update filteredData 
+  }, [data, searchTerm]); 
+  // useEffect(() => {
+  //   const newFilteredData = data.filter(item => {
+  //     const columnValue = item['domainame'];
+
+  //     // If searchTerm is empty or columnValue is nullish, show all data
+  //     if (searchTerm.trim() === '' || !columnValue) { 
+  //       return true;
+  //     }
+
+  //     return String(columnValue).toLowerCase().includes(searchTerm.toLowerCase());
+  //   });
+    
+  //   setDashboardData(newFilteredData);
+  // }, [dashboardData, searchTerm]); 
+
+  // useEffect(() => {
+  //   const newFilteredData = data.filter(item => {
+  //     const columnValue = item['domainame'];
+  //     if (!columnValue) return false; 
+
+  //     // Check if searchTerm is empty before filtering
+  //     if (searchTerm.trim() === '') {
+  //       return true;
+  //     }
+
+  //     return String(columnValue).toLowerCase().includes(searchTerm.toLowerCase()); 
+  //   });
+    
+  //   // This conditional statement ensures setFilteredData
+  //   // is only called when the filtered data has actually changed.
+  //   if (JSON.stringify(newFilteredData) !== JSON.stringify(filteredData)) {
+  //     setDashboardData(newFilteredData); 
+  //   }
+  // }, [dashboardData, searchTerm]);
+  // useEffect(() => {
+  //   searchTermRef.current = searchTerm; // Update the ref on every render
+  // }, [searchTerm]); // Make the effect depend on searchTerm
+
+  // useEffect(() => {
+  //   const newFilteredData = data.filter(item => {
+  //     const columnValue = item['domainame'];
+  //     if (!columnValue) return false; 
+
+  //     // Use the value from the ref for comparison
+  //     if (searchTermRef.current.trim() === '') {
+  //       return true;
+  //     }
+
+  //     return String(columnValue).toLowerCase().includes(searchTermRef.current.toLowerCase()); 
+  //   });
+
+  //   setDashboardData(newFilteredData);
+  // }, [dashboardData, searchTerm]); 
+  // useEffect(() => {
+  //   const newFilteredData = dashboardData.filter(item => {
+  //     const columnValue = item['domainame'];
+  //     if (!columnValue) return false; // Handle cases where column value is null/undefined
+
+  //     // If searchTerm is empty, show all data
+  //     if (searchTerm.trim() === '') {
+  //       return true; 
+  //     }
+
+  //     return String(columnValue).toLowerCase().includes(searchTerm.toLowerCase());
+  //   });
+
+  //   setDashboardData(newFilteredData);
+  // }, [data, searchTerm]); 
+
+  // useEffect(() => {
+  //   const newFilteredData = dashboardData.filter(item => {
+  //     const columnValue = item['domainame']; // Get the value of the selected column
+  //     return String(columnValue).toLowerCase().includes(searchTerm.toLowerCase());
+  //   });
+  //   setDashboardData(newFilteredData);
+  // }, [dashboardData, searchTerm]); 
   return (
     <Container>
       <div tw="flex items-center justify-between px-2 sm:px-12 py-4 bg-[#FFE1CF] mb-12">
-        <div>
+        <a href="/">
           <img src={dashlogo}></img>
-        </div>
+        </a>
         <div tw="flex">
           <img tw="pr-3 hidden sm:flex" src={dash1}></img>
           <img tw="pr-3 hidden sm:flex" src={dash2}></img>
@@ -139,7 +234,7 @@ export default () => {
         </div>
         <div tw="flex justify-end hidden sm:flex">
           <span
-            tw="p-2 bg-[#E1DCFF] rounded-full md:px-2 lg:px-4 flex mr-2 text-sm font-semibold "
+            tw="cursor-pointer p-2 bg-[#E1DCFF] rounded-full md:px-2 lg:px-4 flex mr-2 text-sm font-semibold "
             onClick={() => useToggleFilt(true)}
           >
             <img tw="md:w-[30%] lg:w-full pr-1" src={filter}></img>Filters
@@ -147,11 +242,21 @@ export default () => {
           <input
             tw="border-2 w-[20%] md:w-[30%] lg:w-auto rounded-md mr-2 px-2"
             placeholder="search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           ></input>
           <a
-          onClick={()=>navigate('/order', { state: {fromDashboard: selected}})}
+          onClick={()=>{
+            if(selected.length>0){
+
+              navigate('/order', { state: {fromDashboard: selected}})
+            }else{
+              showToastMessage("Select domains to add users")
+            }
+          
+          }}
             // href="/domains"
-            tw="p-2 bg-[#9DFFD0] rounded-full md:px-2 flex mr-2 font-semibold lg:px-4"
+            tw="cursor-pointer p-2 bg-[#9DFFD0] rounded-full md:px-2 flex mr-2 font-semibold lg:px-4"
           >
             Create Users
           </a>
@@ -166,11 +271,15 @@ export default () => {
           <>
             <div tw="fixed w-[80%] sm:w-[40%] z-10 top-[20%] p-2 px-4 md:right-[10%] right-[5%] rounded-2xl border  border-blackLight bg-white">
               <div tw="flex justify-end mb-2">
-                <CloseIcon onClick={() => useToggleFilt(false)}></CloseIcon>
+                <CloseIcon tw="cursor-pointer" onClick={() => useToggleFilt(false)}></CloseIcon>
               </div>
               <div tw="flex justify-between items-center">
-                <div tw="text-2xl ">Filters</div>
-                <div tw="text-[#6F57F1]">Clear all</div>
+                <div tw="text-2xl font-bold ">Filters</div>
+                <div onClick={()=>{
+                  setDataFilter([])
+                  setDomainFilter([])
+                  setTagFilter([])
+                }} tw="cursor-pointer text-[#6F57F1] font-semibold">Clear all</div>
               </div>
               <hr tw="my-4"></hr>
               <div tw="grid grid-cols-1">
@@ -200,19 +309,16 @@ export default () => {
                 />
                 </div>
               </div>
-              <div tw="flex justify-end">
-                <button tw="bg-[#F6FAFF] p-2 px-6 text-black rounded-md font-semibold">Cancel</button>
+              <div tw="flex justify-end mb-2">
                 <button onClick={()=>{
-                  console.log("HEllo")
-                  // const filteredData = data.filter(mainItem => {
-                  //   return domainFilter.some(filterItem => filterItem.value === mainItem.domainame);
-                  // });
-                  // const x2filteredData = data.filter(mainItem => {
-                  //   return domainFilter.some(filterItem => filterItem.value === mainItem.domainame);
-                  // });
-                  // console.log(domainFilter[value])
+                  setDashboardData(data)
+                  setDataFilter([])
+                  setDomainFilter([])
+                  setTagFilter([])
+                  useToggleFilt(false)
+                }} tw="bg-[#F6FAFF] p-2 px-6 text-black rounded-md font-semibold">Cancel</button>
+                <button onClick={()=>{              
                   setDashboardData(filteredData)
-                  console.log(filteredData)
                 }} tw="bg-[#6F57F5] p-2 px-6 text-white rounded-md ml-3 font-semibold">Apply</button>
               </div>
             </div>
@@ -235,10 +341,12 @@ export default () => {
               <input
                 tw="border-2 mb-2 md:w-[30%] py-2 lg:w-auto rounded-md mr-2 px-2 sm:w-full"
                 placeholder="search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               ></input>
               <a
-                href="/domains"
-                tw="p-2 bg-[#9DFFD0] mb-2 rounded-full md:px-2 flex mr-2 font-semibold lg:px-4"
+          onClick={()=>navigate('/order', { state: {fromDashboard: selected}})}
+          tw="p-2 bg-[#9DFFD0] mb-2 rounded-full md:px-2 flex mr-2 font-semibold lg:px-4"
               >
                 Create Users
               </a>
@@ -345,7 +453,12 @@ export default () => {
             );
           })}
         </table>
+        {dashboardData.length>0?<></>:<><div tw="text-5xl py-3 mx-auto text-center text-blackLight">
+          No Domains Available
+        </div></>}
+        
       </div>
+      <ToastContainer/>
     </Container>
   );
 };

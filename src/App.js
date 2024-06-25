@@ -32,7 +32,6 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 // import Hero from "components/hero/BackgroundAsImageWithCenteredContent.js";
 
 // import Features from "components/features/ThreeColSimple.js";
-import Features from "components/features/Why.js";
 // import Features from "components/features/ThreeColWithSideImageWithPrimaryBackground.js";
 // import Features from "components/features/VerticalWithAlternateImageAndText.js";
 // import Features from "components/features/DashedBorderSixFeatures";
@@ -85,32 +84,20 @@ import Features from "components/features/Why.js";
 // import EventLandingPage from "demos/EventLandingPage.js";
 // import HotelTravelLandingPage from "demos/HotelTravelLandingPage.js";
 // import AgencyLandingPage from "demos/AgencyLandingPage.js";
-import SaaSProductLandingPage from "demos/LandingPage.js";
+import SaaSProductLandingPage from "main/LandingPage.js";
 // import RestaurantLandingPage from "demos/RestaurantLandingPage.js";
 // import ServiceLandingPage from "demos/ServiceLandingPage.js";
 // import HostingCloudLandingPage from "demos/HostingCloudLandingPage.js";
-
-/* Inner Pages */
-// import LoginPage from "pages/Login.js";
-// import SignupPage from "pages/Signup.js";
-// import PricingPage from "pages/Pricing.js";
-// import AboutUsPage from "pages/AboutUs.js";
-// import ContactUsPage from "pages/ContactUs.js";
-// import BlogIndexPage from "pages/BlogIndex.js";
-// import TermsOfServicePage from "pages/TermsOfService.js";
-// import PrivacyPolicyPage from "pages/PrivacyPolicy.js";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import ComponentRenderer from "ComponentRenderer.js";
-import MainLandingPage from "MainLandingPage.js";
-import ThankYouPage from "ThankYouPage.js";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "pages/Login.js";
 import Signup from "pages/Signup";
-import DashedBorderSixFeatures from "components/features/DashedBorderSixFeatures";
-import FullWidthWithImage from "components/hero/FullWidthWithImage";
-import BackgroundAsImageWithCenteredContent from "components/hero/BackgroundAsImageWithCenteredContent";
-import BackgroundAsImage from "components/hero/BackgroundAsImage";
+import FullWidthWithImage from "components/hero/Dashboard";
+import BackgroundAsImageWithCenteredContent from "components/hero/Domains";
+import BackgroundAsImage from "components/hero/Orders";
 
 export default function App() {
   // If you want to disable the animation just use the disabled `prop` like below on your page's component

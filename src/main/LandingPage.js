@@ -1,23 +1,15 @@
 import React from "react";
 import tw from "twin.macro";
 import { css } from "styled-components/macro"; //eslint-disable-line
-import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import Hero from "components/hero/Hero.js";
 import Why from "components/features/Why.js";
 import Payment from "components/features/Payment.js";
-import MainFeature from "components/features/TwoColWithButton.js";
-import MainFeature2 from "components/features/TwoColWithTwoHorizontalFeaturesAndButton.js";
-import FeatureWithSteps from "components/features/TwoColWithSteps.js";
-import Pricing from "components/pricing/ThreePlans.js";
-import FAQ from "components/faqs/SingleCol.js";
-import GetStarted from "components/cta/GetStarted";
+import MainFeature from "components/features/Benefit.js";
+import FAQ from "components/faqs/FAQ.js";
 import Footer from "components/footers/Footer.js";
 import heroScreenshotImageSrc from "images/hero-screenshot-1.png";
 import Testimonial from "components/features/Testimonial";
-import macHeroScreenshotImageSrc from "images/hero-screenshot-2.png";
-import prototypeIllustrationImageSrc from "images/prototype-illustration.svg";
-import { ReactComponent as BriefcaseIcon } from "feather-icons/dist/icons/briefcase.svg";
-import { ReactComponent as MoneyIcon } from "feather-icons/dist/icons/dollar-sign.svg";
+
 export default () => {
   const Subheading = tw.span`uppercase tracking-widest font-bold text-primary-500`;
   const HighlightedText = tw.span`text-primary-500`;

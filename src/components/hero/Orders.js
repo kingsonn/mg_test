@@ -2,9 +2,6 @@ import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
-import check from "../../images/blankcheck.svg";
-import filter from "../../images/filter.svg"
-import LogoImage from "images/footerLogo.svg";
 import dash1 from "../../images/dash1.svg"
 import dash2 from "../../images/dash2.svg"
 import dash3 from "../../images/dash3.svg"
@@ -17,55 +14,12 @@ import { useLocation } from 'react-router-dom';
 
 import { MultiSelect } from "react-multi-select-component";
 
-import Header, {
-  LogoLink,
-  NavLinks,
-  NavLink as NavLinkBase,
-} from "../headers/light.js";
 import { useState, useEffect } from "react";
-const StyledHeader = styled(Header)`
-  ${tw`justify-between`}
-  ${LogoLink} {
-    ${tw`mr-8 pb-0`}
-  }
-`;
-
-const NavLink = tw(NavLinkBase)`
-  sm:text-sm sm:mx-6
-`;
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Container = tw.div``;
-const TwoColumn = tw.div`flex flex-col lg:flex-row bg-gray-100`;
-const LeftColumn = tw.div`ml-8 w-full mr-8 xl:pl-10 py-8`;
-const RightColumn = styled.div`
-  background-image: url("https://images.unsplash.com/photo-1551918120-9739cb430c6d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&width=1440&height=1024&q=75");
-  ${tw`bg-green-500 bg-cover bg-center xl:ml-24 h-96 lg:h-auto lg:w-1/2 lg:flex-1`}
-`;
+const Heading = tw.h3`text-lg sm:text-lg md:text-2xl lg:text-3xl font-black leading-none my-4 font-semibold`;
 
-const Content = tw.div`mt-24 lg:mt-24 lg:mb-24 flex flex-col sm:items-center lg:items-stretch`;
-const Heading = tw.h3`text-3xl sm:text-5xl md:text-6xl lg:text-2xl font-black leading-none my-4 font-semibold`;
-const Paragraph = tw.p`max-w-md my-8 lg:my-5 lg:my-8 sm:text-lg lg:text-base xl:text-lg leading-loose`;
-
-const Actions = styled.div`
-  ${tw`mb-8 lg:mb-0`}
-  .action {
-    ${tw`text-center inline-block w-full sm:w-48 py-4 font-semibold tracking-wide rounded hocus:outline-none focus:shadow-outline transition duration-300`}
-  }
-  .primaryAction {
-    ${tw`bg-primary-500 text-gray-100 hover:bg-primary-700`}
-  }
-  .secondaryAction {
-    ${tw`mt-4 sm:mt-0 sm:ml-4 bg-gray-300 text-gray-700 hover:bg-gray-400 hover:text-gray-800`}
-  }
-`;
-const data = [
-  { provider: "Google", Persona: "Bharat Arora", email: "bharat456@gmail.com" , domain: "meetgenius.com", price:"$15"},
-  { provider: "Google", Persona: "Bharat Arora", email: "bharat456@gmail.com" , domain: "meetgenius.com", price:"$15"},
-  { provider: "Google", Persona: "Bharat Arora", email: "bharat456@gmail.com" , domain: "meetgenius.com", price:"$15"},
-
-];
-
-const domains = ["hello.com", "bello.com", "mello.com"]
 export default () => {
   const [dom, useDom] = useState([])
   const [fname, usefname] = useState()
@@ -77,21 +31,23 @@ export default () => {
   function addition(){
 
     selectedFlavors.forEach((element) => {
-      let newObj = {provider: "Google", Persona: fname+" "+lname, email:`${mail}@${element.value}`, domain:element.value, price: 5}
-      domainCheck[newObj.domain] = (domainCheck[newObj.domain]||0) + 1;
-      if(domainCheck[newObj.domain]<=3){
-        mailCheck[newObj.email] = (mailCheck[newObj.email] || 0) +1
-        if(mailCheck[newObj.email]<=1){
-          useOrder(orderData=> [...orderData, newObj])
-  
-        }else {
-          mailCheck[newObj.email]= 1
-        }      
-      }else {
-        console.log("Errrrrrrryyeyaar")
-        domainCheck[newObj.domain]= 3
-      }
+      const space=" "
+      let newObj = {provider: "Google", Persona: `${fname} ${lname}`, email:`${mail}@${element.value}`, domain:element.value, price: 5}
       
+      mailCheck[newObj.email] = (mailCheck[newObj.email] || 0) +1
+      if(mailCheck[newObj.email]<=1){
+        domainCheck[newObj.domain] = (domainCheck[newObj.domain]||0) + 1;
+        if(domainCheck[newObj.domain]<=3){
+          useOrder(orderData=> [...orderData, newObj])
+        }else {
+          console.log("Errrrrrrryyeyaar")
+          domainCheck[newObj.domain]= 3
+          showToastMessage("We recommend limiting 3 users per domain.")
+        }
+      }else {
+        mailCheck[newObj.email]= 1
+        showToastMessage("You cannot create same email ids.")
+      }
     });  
     console.log(domainCheck)
     
@@ -120,27 +76,26 @@ useEffect(() => {
       
       let newObj = {provider: "Google", Persona: user, email:`${user}@${item.domainame}`, domain:item.domainame, price: 5}
 
-      domainCheck[newObj.domain] = (domainCheck[newObj.domain]||0) + 1;
-      if(domainCheck[newObj.domain]<=3){
-        mailCheck[newObj.email] = (mailCheck[newObj.email] || 0) +1
-        if(mailCheck[newObj.email]<=1){
+      
+      mailCheck[newObj.email] = (mailCheck[newObj.email] || 0) +1
+      if(mailCheck[newObj.email]<=1){
+        domainCheck[newObj.domain] = (domainCheck[newObj.domain]||0) + 1;
+        if(domainCheck[newObj.domain]<=3){
           useOrder(orderData=> [...orderData, newObj])
-  
         }else {
-          mailCheck[newObj.email]= 1
+          console.log("Errrrrrrryyeyaar")
+          domainCheck[newObj.domain]= 3
         }
       }else {
-        console.log("Errrrrrrryyeyaar")
-        domainCheck[newObj.domain]= 3
+        mailCheck[newObj.email]= 1
       }
-    
 
 
     })
   })
 
   }
-}, [fromDashboard? fromDashboard:domains]);
+}, []);
 // receivedData.select.forEach(element => {
 //   useOptions(prev=>[...prev, element])
 // });
@@ -153,66 +108,34 @@ useEffect(() => {
 //   { label: "Blueberry", value: "blueberry" },
 //   { label: "Red Velvet", value: "velvet" }
 // ];
+  const showToastMessage = (message) => {
+    toast.error(message);
+  };
 
   return (
     <Container>
-      {/* <TwoColumn>
-        <LeftColumn>
-          <StyledHeader tw="w-full" links={navLinks} collapseBreakpointClass="sm" /> 
-          <Content>
-            <Heading>{heading}</Heading>
-            <Paragraph>{description}</Paragraph>
-            <Actions>
-              <a href={primaryActionUrl} className="action primaryAction">
-                {primaryActionText}
-              </a>
-              <a href={secondaryActionUrl} className="action secondaryAction">
-                {secondaryActionText}
-              </a>
-            </Actions>
-
-          </Content>
-          <div tw="w-full " className="App">
-            <table tw="table-auto">
-                <tr>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                </tr>
-                {data.map((val, key) => {
-                    return (
-                        <tr key={key}>
-                            <td>{val.name}</td>
-                            <td>{val.age}</td>
-                            <td>{val.gender}</td>
-                        </tr>
-                    )
-                })}
-            </table>
-        </div>
-        </LeftColumn>
-      </TwoColumn> */}
-      <div tw="flex items-center justify-between px-12 py-4 bg-[#FFE1CF] mb-12">
-        <div>
-<img src={dashlogo}></img>   
-     </div>
+   
+   <div tw="flex items-center justify-between px-2 sm:px-12 py-4 bg-[#FFE1CF] mb-12">
+        <a href="/">
+          <img src={dashlogo}></img>
+        </a>
         <div tw="flex">
-          <img tw="pr-3" src={dash1}></img>
-          <img tw="pr-3" src={dash2}></img>
+          <img tw="pr-3 hidden sm:flex" src={dash1}></img>
+          <img tw="pr-3 hidden sm:flex" src={dash2}></img>
           <div tw="flex pr-3 items-center">
             <div tw="pr-1">
               <img src={sample}></img>
             </div>
             <div>
-                <h3 tw="font-semibold">Darsh Prasanna</h3>
-                <p tw="font-light text-sm">Admin</p>
+              <h3 tw="font-semibold hidden sm:flex">Darsh Prasanna</h3>
+              <p tw="font-light text-sm hidden sm:flex">Admin</p>
             </div>
           </div>
           <img tw="pr-3" src={dash3}></img>
-      
         </div>
       </div>
-      <div tw="flex items-center justify-between mx-16">
+       
+      <div tw="flex items-center justify-between mx-6 md:mx-16">
         <div tw="flex items-center mb-4">
           <div tw="border-2 border-blackLight p-2 px-4 mr-2 rounded-lg">
           <a href="/domains"><img  tw="" src={back}></img></a>
@@ -220,26 +143,26 @@ useEffect(() => {
           <Heading>Back</Heading>
         </div>
       </div>
-      <div tw="flex items-center justify-between mx-16">
+      <div tw="flex items-center justify-between mx-6 md:mx-16">
         <div tw="flex items-center mb-4">
-          <div tw="border-2 invisible border-blackLight p-2 px-4 mr-2 rounded-lg">
+          <div tw="border-2 hidden md:flex md:invisible border-blackLight p-2 px-4 mr-2 rounded-lg">
           <img  tw="" src={back}></img>
           </div>
           <div>
 
           <Heading>Order</Heading>
-          <p tw="text-sm">Order new emails</p>
+          <p tw="text-sm font-medium">Order new emails</p>
           </div>
         </div>
       </div>
-      <div tw="mx-10">
-<div tw="mx-24 w-auto border-2 px-6 py-4 rounded-lg shadow-lg mb-10">
+      <div tw="md:mx-10">
+<div tw="mx-6 md:mx-24 w-auto border-2 px-6 py-4 rounded-lg shadow-lg mb-10">
   <Heading>Forwarding Domain:</Heading>
-  <div tw="w-full bg-[#E7F0FF] p-2 mb-6">
-  Https://www.consultinggenuies.com
-  </div>
+  <input value={'Https://www.consultinggenuies.com'} tw="overflow-scroll w-full bg-[#E7F0FF] p-2 mb-6">
+  
+  </input>
 </div>
-<div tw="mx-24 mb-10 grid grid-cols-6 justify-between gap-10 w-auto border-2 px-6 py-4 rounded-lg shadow-lg">
+<div tw="mx-6 md:mx-24 mb-10 grid grid-cols-6 justify-between gap-10 w-auto border-2 px-6 py-4 rounded-lg shadow-lg">
  <div tw="pt-4 col-span-3"> 
   <p tw="font-semibold pb-2">
     First name:
@@ -252,7 +175,7 @@ useEffect(() => {
   </p>
   <input tw="w-[100%] p-3 rounded-lg  border-2 border-blackLight" onChange={(e)=>uselname(e.target.value)}></input>
  </div>
- <div tw="pt-4 col-span-4"> 
+ <div tw="pt-4 col-span-6 md:col-span-4"> 
   <p tw="font-semibold pb-2">
     Email:
   </p>
@@ -261,7 +184,7 @@ useEffect(() => {
   <span tw="text-xl p-2 px-4 bg-[#E7F0FF] rounded-md">@</span>
   </div>
  </div>
- <div tw="pt-4 col-span-2"> 
+ <div tw="pt-4 col-span-6 md:col-span-2"> 
   <p tw="font-semibold pb-2">
    Select domains:
   </p>
@@ -288,8 +211,8 @@ useEffect(() => {
  
 
 </div>
-<div tw="mx-24  border-2 rounded-md shadow-md">
-        <table tw="table-auto w-full ">
+<div tw="mx-6 md:mx-24  border-2 rounded-md shadow-md overflow-scroll">
+        <table tw="table-auto w-full">
           <tr tw="mx-8 bg-[#F2F2FC] text-[#808086] ">
           
             <th tw=" flex items-center mx-8 my-4 font-medium">Provider</th>
@@ -297,13 +220,13 @@ useEffect(() => {
             <th tw="font-medium">Email</th>
             <th tw="font-medium">Domain</th>
             <th tw="font-medium">Action</th>
-            <th tw="font-medium">Price</th>
+            <th tw="font-medium mr-2">Price</th>
           </tr>
           {orderData?<>{orderData.map((val, key) => {
             return (
               <tr key={key} tw="text-center border-b border-blackLight">
-                <td tw=" flex items-center mx-8 my-6 font-semibold"><span tw="p-1 flex px-2 bg-white border border-blackLight  rounded-full font-semibold mx-1"><img tw="pr-3" src={gg}></img>{val.provider}</span></td>
-                <td ><span tw="p-1 px-2 bg-white border border-blackLight  rounded-full font-semibold mx-1">{val.Persona}</span></td>
+                <td tw=" flex items-center md:mx-8 my-6 font-semibold"><span tw="p-1 flex px-2 bg-white border border-blackLight  rounded-full font-semibold mx-1"><img tw="pr-3" src={gg}></img>{val.provider}</span></td>
+                <td tw="truncate overflow-scroll"><span tw="  w-full p-1 px-2 bg-white border flex-nowrap border-blackLight  rounded-full font-semibold mx-1">{val.Persona}</span></td>
                 <td><span tw="p-1 px-2 bg-white border border-blackLight  rounded-full font-semibold mx-1">{val.email}</span></td>
                 <td><span tw="p-1 px-2 bg-white border border-blackLight  rounded-full font-semibold mx-1">{val.domain}</span></td>
                 
@@ -314,20 +237,22 @@ useEffect(() => {
                 <td tw="font-semibold"><span tw="p-1 px-2 bg-white border border-blackLight  rounded-full font-semibold mx-1">${val.price}</span></td>
               </tr>
 
-            );
-          })}</>:<></>}
           
-        </table>
-        <div tw="text-end px-10 text-lg font-semibold py-3 border-t border-b border-blackLight">Subtotal (Monthly Price): ${orderData.length*5}</div>
-        <div tw="text-end px-10 text-lg font-semibold py-3 border-t border-b border-blackLight">Domain Annual Price: ${orderData.length*5}</div>
-        <div tw="text-end px-10 text-lg font-semibold py-3 border-t border-b border-blackLight">Total Price: ${orderData.length*10}</div>
-      </div>
-<div tw="flex mx-24 my-10  justify-between items-center">
+);
+})}</>:<></>}
+</table>
+</div>
+          <div tw="mx-6 md:mx-24 border border-blackLight rounded-lg shadow-md bg-white">
+        <div tw="text-end px-10 text-sm md:text-lg font-semibold py-3 border-t border-b border-blackLight">Subtotal (Monthly Price): ${orderData.length*5}</div>
+        <div tw="text-end px-10 text-sm md:text-lg font-semibold py-3 border-t border-b border-blackLight">Domain Annual Price: ${orderData.length*5}</div>
+        <div tw="text-end px-10 text-sm md:text-lg font-semibold py-3 border-t border-b border-blackLight">Total Price: ${orderData.length*10}</div>
+        </div>
+<div tw="flex mx-6 md:mx-24 my-10  justify-between items-center">
 <div tw="text-sm text-gray-700">Please allow 24 to 72 hour for your emails to be set up as DNS propagation can take some time</div>
 <div tw="p-2 bg-[#4281FA] rounded-lg text-white font-semibold text-lg px-4">Place order</div>
 </div>
 </div>
-
+<ToastContainer/>
     </Container>
   );
 };
