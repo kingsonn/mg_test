@@ -233,41 +233,14 @@ export default () => {
           <Heading>Dashboard</Heading>
         </div>
         <div tw="flex justify-end hidden sm:flex">
+          <div>
           <span
             tw="cursor-pointer p-2 bg-[#E1DCFF] rounded-full md:px-2 lg:px-4 flex mr-2 text-sm font-semibold "
             onClick={() => useToggleFilt(true)}
           >
             <img tw="md:w-[30%] lg:w-full pr-1" src={filter}></img>Filters
           </span>
-          <input
-            tw="border-2 w-[20%] md:w-[30%] lg:w-auto rounded-md mr-2 px-2"
-            placeholder="search"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          ></input>
-          <a
-          onClick={()=>{
-            if(selected.length>0){
-
-              navigate('/order', { state: {fromDashboard: selected}})
-            }else{
-              showToastMessage("Select domains to add users")
-            }
-          
-          }}
-            // href="/domains"
-            tw="cursor-pointer p-2 bg-[#9DFFD0] rounded-full md:px-2 flex mr-2 font-semibold lg:px-4"
-          >
-            Create Users
-          </a>
-          <a
-            href="/domains"
-            tw="p-2 bg-[#6F57F5] rounded-full text-white md:px-2 lg:px-4 flex mr-2 font-semibold"
-          >
-            Add Domains
-          </a>
-        </div>
-        {toggleFilt ? (
+          {toggleFilt ? (
           <>
             <div tw="fixed w-[80%] sm:w-[40%] z-10 top-[20%] p-2 px-4 md:right-[10%] right-[5%] rounded-2xl border  border-blackLight bg-white">
               <div tw="flex justify-end mb-2">
@@ -326,6 +299,36 @@ export default () => {
         ) : (
           <div tw="hidden"></div>
         )}
+          </div>
+          <input
+            tw="border-2 w-[20%] md:w-[30%] lg:w-auto rounded-md mr-2 px-2"
+            placeholder="search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          ></input>
+          <a
+          onClick={()=>{
+            if(selected.length>0){
+
+              navigate('/order', { state: {fromDashboard: selected}})
+            }else{
+              showToastMessage("Select domains to add users")
+            }
+          
+          }}
+            // href="/domains"
+            tw="cursor-pointer p-2 bg-[#9DFFD0] rounded-full md:px-2 flex mr-2 font-semibold lg:px-4"
+          >
+            Create Users
+          </a>
+          <a
+            href="/domains"
+            tw="p-2 bg-[#6F57F5] rounded-full text-white md:px-2 lg:px-4 flex mr-2 font-semibold"
+          >
+            Add Domains
+          </a>
+        </div>
+      
         {toggle ? (
           <>
             <div tw=" fixed sm:hidden right-0 mx-2 mt-32 bg-[#FFE1CF] p-3 rounded-lg">
